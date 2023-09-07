@@ -14,9 +14,22 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 
 def get_month_title_by_number(month_number: int):
-    pass  # код писать тут
+    return ['Январь',
+            'Февраль',
+            'Март',
+            'Апрель',
+            'Май',
+            'Июнь',
+            'Июль',
+            'Август',
+            'Сентябрь',
+            'Октябрь',
+            'Ноябрь',
+            'Декабрь'
+            ][month_number - 1]
 
 
 def get_month_title_view(request, month_number: int):
-    # код писать тут
+    if month_number in range(1, 13):
+        return HttpResponseNotFound(get_month_title_by_number(month_number))
     return HttpResponseNotFound('Месяца с таким номером не существует')
