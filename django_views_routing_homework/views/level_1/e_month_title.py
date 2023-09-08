@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound
+import calendar, locale
 
 
 """
@@ -14,9 +15,12 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 
 def get_month_title_by_number(month_number: int):
-    pass  # код писать тут
+    locale.setlocale(locale.LC_ALL, "ru_RU")
+    months = list(calendar.month_name)
+    return months[month_number]
 
 
 def get_month_title_view(request, month_number: int):
-    # код писать тут
+    if month_number in range(1, 13):
+        return HttpResponseNotFound(get_month_title_by_number(month_number))
     return HttpResponseNotFound('Месяца с таким номером не существует')
