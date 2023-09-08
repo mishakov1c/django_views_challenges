@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound
+import calendar, locale
 
 
 """
@@ -14,19 +15,9 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 
 def get_month_title_by_number(month_number: int):
-    return ['Январь',
-            'Февраль',
-            'Март',
-            'Апрель',
-            'Май',
-            'Июнь',
-            'Июль',
-            'Август',
-            'Сентябрь',
-            'Октябрь',
-            'Ноябрь',
-            'Декабрь'
-            ][month_number - 1]
+    locale.setlocale(locale.LC_ALL, "ru_RU")
+    months = list(calendar.month_name)
+    return months[month_number]
 
 
 def get_month_title_view(request, month_number: int):
