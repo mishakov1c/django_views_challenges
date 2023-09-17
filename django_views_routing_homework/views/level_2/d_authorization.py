@@ -38,7 +38,11 @@ USERNAME_TO_PASSWORD_MAPPER = {
 def process_authorization_view(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        # код писать тут
+        print(data)
+        for username, password in USERNAME_TO_PASSWORD_MAPPER.items():
+            if data['username'] == username and data['password'] == password:
+                return JsonResponse(data={}, status=200)
+        return JsonResponse(data={}, status=403)
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 
@@ -46,4 +50,3 @@ def process_authorization_view(request):
 # не обращайте внимания на эту вьюху, она нужна лишь для отрисовки страницы авторизации
 def authorization_view(request):
     return render(request, 'authorization.html')
-
