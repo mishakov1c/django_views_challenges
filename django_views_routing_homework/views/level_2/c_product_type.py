@@ -38,8 +38,7 @@ PRODUCTS = [
 
 def get_products_view(request):
     products = PRODUCTS
-    product_type = request.GET.get('type')
-    if product_type:
+    if product_type := request.GET.get('type'):
         products = [product for product in PRODUCTS if product['type'] == product_type]
 
     return JsonResponse(data=products, safe=False)
